@@ -38,9 +38,19 @@ import {
   const db = getDatabase();
 
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log('recived message')
-      set(ref(db, message.message), 0);
-      sendResponse("data sent to db");
-
+    console.log("recived message");
+    send(message.message).then(sendResponse);
   });
+
+  const send = async (msg) => {
+    const dbRef = ref(getDatabase(app));
+
+    let val;
+
+    set(ref(db, "commetns"), msg);
+
+    console.log(val);
+
+    return val;
+  };
   
